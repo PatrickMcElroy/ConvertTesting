@@ -12,7 +12,7 @@ struct JobDetail: View {
     var job: Job
 
     var body: some View {
-        Text("more details will go here")
+        ComponentList()
             .navigationTitle(job.name)
             .navigationBarTitleDisplayMode(.large)
             }

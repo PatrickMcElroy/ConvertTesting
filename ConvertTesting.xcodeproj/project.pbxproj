@@ -12,6 +12,8 @@
 		CD0AAF7E266151420081E749 /* JobData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF7D266151420081E749 /* JobData.swift */; };
 		CD0AAF80266151990081E749 /* JobList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF7F266151990081E749 /* JobList.swift */; };
 		CD0AAF82266151B80081E749 /* JobDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF81266151B80081E749 /* JobDetail.swift */; };
+		CD0AAF86266188920081E749 /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF85266188920081E749 /* ComponentView.swift */; };
+		CD0AAF8826618C550081E749 /* ComponentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF8726618C550081E749 /* ComponentList.swift */; };
 		CDB3F65B266137DA00F6D3AD /* ConvertTestingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F65A266137DA00F6D3AD /* ConvertTestingApp.swift */; };
 		CDB3F65D266137DA00F6D3AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F65C266137DA00F6D3AD /* ContentView.swift */; };
 		CDB3F65F266137DC00F6D3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDB3F65E266137DC00F6D3AD /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		CD0AAF7D266151420081E749 /* JobData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobData.swift; sourceTree = "<group>"; };
 		CD0AAF7F266151990081E749 /* JobList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobList.swift; sourceTree = "<group>"; };
 		CD0AAF81266151B80081E749 /* JobDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetail.swift; sourceTree = "<group>"; };
+		CD0AAF85266188920081E749 /* ComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentView.swift; sourceTree = "<group>"; };
+		CD0AAF8726618C550081E749 /* ComponentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentList.swift; sourceTree = "<group>"; };
 		CDB3F657266137DA00F6D3AD /* ConvertTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConvertTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB3F65A266137DA00F6D3AD /* ConvertTestingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTestingApp.swift; sourceTree = "<group>"; };
 		CDB3F65C266137DA00F6D3AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				CDB3F65C266137DA00F6D3AD /* ContentView.swift */,
 				CD0AAF7F266151990081E749 /* JobList.swift */,
 				CDB3F6C226613D5500F6D3AD /* JobView.swift */,
+				CD0AAF85266188920081E749 /* ComponentView.swift */,
+				CD0AAF8726618C550081E749 /* ComponentList.swift */,
 				CD0AAF81266151B80081E749 /* JobDetail.swift */,
 				CD0AAF83266186800081E749 /* Resources */,
 				CD0AAF842661868F0081E749 /* Class Stuff */,
@@ -295,9 +301,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD0AAF82266151B80081E749 /* JobDetail.swift in Sources */,
+				CD0AAF8826618C550081E749 /* ComponentList.swift in Sources */,
 				CD0AAF7E266151420081E749 /* JobData.swift in Sources */,
 				CD0AAF80266151990081E749 /* JobList.swift in Sources */,
 				CDB3F6C326613D5500F6D3AD /* JobView.swift in Sources */,
+				CD0AAF86266188920081E749 /* ComponentView.swift in Sources */,
 				CDB3F65D266137DA00F6D3AD /* ContentView.swift in Sources */,
 				CDB3F65B266137DA00F6D3AD /* ConvertTestingApp.swift in Sources */,
 				CD0AAF7C266150660081E749 /* Job.swift in Sources */,
