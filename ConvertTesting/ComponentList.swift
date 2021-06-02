@@ -7,13 +7,20 @@
 
 import SwiftUI
 
+class ViewComponents: ObservableObject {
+    @Published var arr = [Component(name: "Inside of AC Disconnect"), Component(name: "Outside of AC Disconnect"), Component(name: "Inside of Main Panel"), Component(name: "Outside of Main Panel"), Component(name: "Finished Panels"), Component(name: "Optimizer or Microinverter Wiring"), Component(name: "Inside of Soladeck Box"), Component(name: "Attic Conduit Run"), Component(name: "Outside Run To Inverter")]
+}
+
 struct ComponentList: View {
+    @State var viewHidden = false
+    @ObservedObject var viewComponents = ViewComponents()
     var body: some View {
         ScrollView {
-            ComponentView(componentName: "Inside of AC Disconnect")
-                .padding()
-            ComponentView(componentName: "Outside of AC Disconnect")
-                .padding()
+            ForEach(self.viewComponents.arr.filter({ !$0.hasPhoto })) { component in
+                
+                ComponentView(componentName: component.name, viewComponents: self.viewComponents)
+                    .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            }
         }
     }
 }
