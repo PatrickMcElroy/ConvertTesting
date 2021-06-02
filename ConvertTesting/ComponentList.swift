@@ -12,13 +12,14 @@ class ViewComponents: ObservableObject {
 }
 
 struct ComponentList: View {
+    var ownerName : String
     @State var viewHidden = false
     @ObservedObject var viewComponents = ViewComponents()
     var body: some View {
         ScrollView {
             ForEach(self.viewComponents.arr.filter({ !$0.hasPhoto })) { component in
                 
-                ComponentView(componentName: component.name, viewComponents: self.viewComponents)
+                ComponentView(componentName: component.name, ownerName: ownerName, viewComponents: self.viewComponents)
                     .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
             }
         }
@@ -27,6 +28,6 @@ struct ComponentList: View {
 
 struct ComponentList_Previews: PreviewProvider {
     static var previews: some View {
-        ComponentList()
+        ComponentList(ownerName: "John A")
     }
 }

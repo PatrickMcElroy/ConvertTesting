@@ -11,6 +11,7 @@ import Photos
 
 struct ComponentView: View {
     var componentName: String
+    var ownerName: String
     @ObservedObject var viewComponents: ViewComponents
     @State private var showPhotoPicker = false
     @State private var selectedImage: UIImage? = nil
@@ -70,7 +71,21 @@ struct ComponentView: View {
                                   // Uh-oh, an error occurred!
                                   return
                                 }
-                                // upload download url to firebase
+                                // upload download url to firestore database
+                                
+                                let db = Firestore.firestore()
+                                var ref: DocumentReference? = nil
+                                ref = db.collection("owners").addDocument(data: [
+                                    "url": downloadURL.absoluteString,
+                                    "componentName": componentName,
+                                    "owner": ownerName
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error adding document: \(err)")
+                                    } else {
+                                        print("Document added with ID: \(ref!.documentID)")
+                                    }
+                                }
                               }
                             }
                             
@@ -82,6 +97,7 @@ struct ComponentView: View {
 
                             uploadTask.observe(.success) { snapshot in
                               // Upload completed successfully
+                                
                             }
 
                             uploadTask.observe(.failure) { snapshot in
