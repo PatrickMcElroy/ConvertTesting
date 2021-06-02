@@ -12,7 +12,7 @@ struct JobDetail: View {
     var job: Job
 
     var body: some View {
-        ComponentList(ownerName: job.name)
+        ComponentList(name: job.name)
             .navigationTitle(job.name)
             .navigationBarTitleDisplayMode(.large)
             }

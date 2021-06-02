@@ -75,7 +75,7 @@ struct ComponentView: View {
                                 
                                 let db = Firestore.firestore()
                                 var ref: DocumentReference? = nil
-                                ref = db.collection("owners").addDocument(data: [
+                                ref = db.collection("owners/" + ownerName + "/pics").addDocument(data: [
                                     "url": downloadURL.absoluteString,
                                     "componentName": componentName,
                                     "owner": ownerName
