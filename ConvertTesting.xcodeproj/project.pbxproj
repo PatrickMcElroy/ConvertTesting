@@ -27,6 +27,8 @@
 		CDB3F66D266137DC00F6D3AD /* ConvertTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F66C266137DC00F6D3AD /* ConvertTestingTests.swift */; };
 		CDB3F678266137DC00F6D3AD /* ConvertTestingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F677266137DC00F6D3AD /* ConvertTestingUITests.swift */; };
 		CDB3F6C326613D5500F6D3AD /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F6C226613D5500F6D3AD /* JobView.swift */; };
+		CDB6B32B2667E69A00AD57F0 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B32A2667E69A00AD57F0 /* UploadButton.swift */; };
+		CDB6B32D2667F1A000AD57F0 /* MatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B32C2667F1A000AD57F0 /* MatchingView.swift */; };
 		CDFC94972667C75B00DDDEFD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFC94962667C75B00DDDEFD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		CDB3F677266137DC00F6D3AD /* ConvertTestingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTestingUITests.swift; sourceTree = "<group>"; };
 		CDB3F679266137DC00F6D3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDB3F6C226613D5500F6D3AD /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
+		CDB6B32A2667E69A00AD57F0 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
+		CDB6B32C2667F1A000AD57F0 /* MatchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingView.swift; sourceTree = "<group>"; };
 		CDFC94962667C75B00DDDEFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D03A7A6840FB97B4CEF55A1D /* Pods-ConvertTesting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvertTesting.debug.xcconfig"; path = "Target Support Files/Pods-ConvertTesting/Pods-ConvertTesting.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A536D5A1B999FC0CA2744A /* Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig"; path = "Target Support Files/Pods-ConvertTesting-ConvertTestingUITests/Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 				CD0AAF85266188920081E749 /* ComponentView.swift */,
 				CD0AAF8726618C550081E749 /* ComponentList.swift */,
 				CD0AAF81266151B80081E749 /* JobDetail.swift */,
+				CDB6B32A2667E69A00AD57F0 /* UploadButton.swift */,
+				CDB6B32C2667F1A000AD57F0 /* MatchingView.swift */,
 				CD252809266699C3002E5BA9 /* PhotoPicker.swift */,
 				CD0AAF83266186800081E749 /* Resources */,
 				CD0AAF842661868F0081E749 /* Class Stuff */,
@@ -462,7 +468,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD0AAF82266151B80081E749 /* JobDetail.swift in Sources */,
+				CDB6B32D2667F1A000AD57F0 /* MatchingView.swift in Sources */,
 				CD25280C26669B94002E5BA9 /* Component.swift in Sources */,
+				CDB6B32B2667E69A00AD57F0 /* UploadButton.swift in Sources */,
 				CD25280A266699C3002E5BA9 /* PhotoPicker.swift in Sources */,
 				CD252808266659FD002E5BA9 /* ComponentData.swift in Sources */,
 				CD0AAF8826618C550081E749 /* ComponentList.swift in Sources */,

@@ -16,11 +16,18 @@ struct ComponentList: View {
     @State var viewHidden = false
     @ObservedObject var viewComponents = ViewComponents()
     var body: some View {
-        ScrollView {
-            ForEach(self.viewComponents.arr.filter({ !$0.hasPhoto })) { component in
-                
-                ComponentView(componentName: component.name, ownerName: ownerName, viewComponents: self.viewComponents)
-                    .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+        ZStack {
+            ScrollView {
+                ForEach(self.viewComponents.arr.filter({ !$0.hasPhoto })) { component in
+                    
+                    ComponentView(componentName: component.name, ownerName: ownerName, viewComponents: self.viewComponents)
+                        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                }
+            }
+            VStack {
+                Spacer()
+                UploadButton(ownerName: ownerName, selectedImages: [UIImage]())
+                    .padding()
             }
         }
     }
