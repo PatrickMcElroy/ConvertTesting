@@ -17,7 +17,7 @@ struct UploadButton: View {
     @State var selectedImages: [UIImage]
 
     var body: some View {
-        NavigationLink(destination: MatchingView(images: selectedImages), tag: 1, selection: $action) {
+        NavigationLink(destination: MatchingView(images: selectedImages, ownerName: ownerName), tag: 1, selection: $action) {
             EmptyView()
         }
         Button(action: {

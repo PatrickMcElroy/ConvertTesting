@@ -20,6 +20,7 @@ struct ComponentList: View {
     init(name: String) {
         self.ownerName = name
         updateComponents()
+        // TODO: fix the glitching this is causing on scroll view updates
     }
     func updateComponents() {
         let db = Firestore.firestore()

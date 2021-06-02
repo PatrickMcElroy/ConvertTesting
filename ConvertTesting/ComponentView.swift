@@ -55,7 +55,7 @@ struct ComponentView: View {
                             
                             let storage = Storage.storage()
                             let storageRef = storage.reference()
-                            let imageDestRef = storageRef.child("images/image.jpg")
+                            let imageDestRef = storageRef.child("images/image.jpg") // TODO: make this change dynamically? 
                             
                             let data = selectedImage!.jpegData(compressionQuality: 0.1)
                             
@@ -76,6 +76,17 @@ struct ComponentView: View {
                                 let db = Firestore.firestore()
                                 var ref: DocumentReference? = nil
                                 ref = db.collection("owners/" + ownerName + "/pics").addDocument(data: [
+                                    "url": downloadURL.absoluteString,
+                                    "componentName": componentName,
+                                    "owner": ownerName
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error adding document: \(err)")
+                                    } else {
+                                        print("Document added with ID: \(ref!.documentID)")
+                                    }
+                                }
+                                ref = db.collection("pics").addDocument(data: [
                                     "url": downloadURL.absoluteString,
                                     "componentName": componentName,
                                     "owner": ownerName

@@ -9,10 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Spacer()
-            JobList()
-        }
+        JobList()
+            .navigationBarBackButtonHidden(true)
+            .background(Color.white)
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarHidden(true)
+            .navigationBarTitle("")
     }
 }
 

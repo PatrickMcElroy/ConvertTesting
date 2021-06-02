@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct JobList: View {
+
     var body: some View {
             NavigationView {
                 ScrollView {
@@ -16,8 +17,10 @@ struct JobList: View {
                             .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                     }
                 }
+                .navigationBarBackButtonHidden(true)
                 .navigationTitle("Upcoming Jobs")
                 .navigationBarTitleDisplayMode(.large)
+                .background(Color.white)
             }
         
     }
