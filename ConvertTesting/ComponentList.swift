@@ -7,20 +7,23 @@
 
 import SwiftUI
 import Firebase
+import Combine
 
 class ViewComponents: ObservableObject {
-    @Published var arr = [Component(name: "Inside of AC Disconnect"), Component(name: "Outside of AC Disconnect"), Component(name: "Inside of Main Panel"), Component(name: "Outside of Main Panel"), Component(name: "Finished Panels"), Component(name: "Optimizer or Microinverter Wiring"), Component(name: "Inside of Soladeck Box"), Component(name: "Attic Conduit Run"), Component(name: "Outside Run To Inverter")]
+    @Published var arr = components
 }
 
 struct ComponentList: View {
     var ownerName : String
+    let didChange = PassthroughSubject<ComponentList, Never>()
     @State var viewHidden = false
     @ObservedObject var viewComponents = ViewComponents()
+    @State private var displayComponents = [Component]()
     
     init(name: String) {
         self.ownerName = name
-        updateComponents()
-        // TODO: fix the glitching this is causing on scroll view updates
+//        updateComponents()
+        // TODO: make it so loading happens on the main screen when you load the app, and stuff is done locally after that
     }
     func updateComponents() {
         let db = Firestore.firestore()
@@ -31,9 +34,8 @@ struct ComponentList: View {
                     for document in querySnapshot!.documents {
                         let dict = document.data()
                         for doc in dict {
-                            print(doc)
                             if let idx = self.viewComponents.arr.firstIndex(where: { doc.value as! String == $0.name } ) {
-                                self.viewComponents.arr.remove(at: idx)
+                                self.viewComponents.arr[idx].hasPhoto = true
                             }
                         }
                     }

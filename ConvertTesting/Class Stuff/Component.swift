@@ -12,4 +12,5 @@ struct Component: Identifiable {
     let id = UUID()
     var name: String
     var hasPhoto: Bool = false
+    var isSelected: Bool = false
 }

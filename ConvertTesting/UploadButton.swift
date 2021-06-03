@@ -43,8 +43,11 @@ struct UploadButton: View {
                   print(error)
                 }
                 if let images = imagesOrNil {
+                    if (images.count != 0) {
+                        self.action = 1
+                    }
+
                     selectedImages = images
-                    self.action = 1
                 }
               }
             }

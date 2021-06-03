@@ -16,7 +16,6 @@ struct MatchingView: View {
     @State private var viewComponents : [Component] = components
     private var uploads : [UIImage]
     @State private var componentArray : [[String]]
-    @State private var componentNames : [String]
     var ownerName : String
     
     init(images : [UIImage], ownerName : String) {
@@ -24,14 +23,13 @@ struct MatchingView: View {
         self.images = images
         self.uploads = images
         componentArray = [[String]](repeating: [String](), count: images.count)
-        componentNames = [String]()
     }
     
     var body: some View {
         NavigationLink(destination: ContentView(), tag: 1, selection: $action) {
             EmptyView()
         }
-        Image(uiImage: (images.last ?? UIImage(systemName: "plus"))!) //TODO: change this to blank
+        Image(uiImage: (images.last ?? UIImage())) //TODO: change this to blank
             .resizable()
             .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 0, idealHeight: 200, maxHeight: 300, alignment: .center)
             .navigationBarTitle("Match Your Photos")
@@ -43,35 +41,37 @@ struct MatchingView: View {
                 ForEach(viewComponents) { component in
                     Button(action: {
                         if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
+                            self.viewComponents[idx].isSelected.toggle()
                             self.viewComponents[idx].hasPhoto.toggle()
                         }
-                        self.componentNames.append(component.name)
+                        self.componentArray[images.count - 1].append(component.name)
+                        // TODO: remove if deselecting !!! problem!!!
                     }) {
                         Text(component.name)
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.black)
                             .frame(width: 300, height: 40, alignment: .center)
-                            .background(Color.white)
+                            .background(component.isSelected ? Color.green : Color.white)
                             .cornerRadius(10)
                             .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
                             .shadow(radius: 4)
-                            .colorMultiply(component.hasPhoto ? .green : .white)
+                            .colorMultiply(component.hasPhoto && !component.isSelected ? Color.init(UIColor(red: 0.6, green: 0.9, blue: 0.6, alpha: 1)) : .white)
                         
                     }
                     .padding()
                     }
                         
                 }
-            }
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
                     Button(action: {
                         images.removeLast()
-                        componentArray[images.count] = componentNames
-                        componentNames = [String]()
+                        for i in (0...viewComponents.count - 1) {
+                            viewComponents[i].isSelected = false
+                        }
                         if (images.count == 1) {
                             nextText = "Done"
                         }
@@ -80,12 +80,11 @@ struct MatchingView: View {
                             for i in (0...uploads.count - 1) {
                                 for component in componentArray[i] {
                                     
-                                    var selectedImage = uploads[i]
                                     let storage = Storage.storage()
                                     let storageRef = storage.reference()
-                                    let imageDestRef = storageRef.child("images/image.jpg") // TODO: make this change dynamically?
+                                    let imageDestRef = storageRef.child("images/" + String(i) + ".jpg")
                                     
-                                    let data = selectedImage.jpegData(compressionQuality: 0.1) // TODO: change the compression quality? (everywhere this is used)
+                                    let data = uploads[i].jpegData(compressionQuality: 0.1) // TODO: change the compression quality? (everywhere this is used)
                                     
                                     let uploadTask = imageDestRef.putData(data!, metadata: nil) { (metadata, error) in
                                       guard let metadata = metadata else {
@@ -143,6 +142,7 @@ struct MatchingView: View {
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 30))
                 }
             }
+        }
         }
     }
 
