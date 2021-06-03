@@ -41,8 +41,11 @@ struct MatchingView: View {
                 ForEach(viewComponents) { component in
                     Button(action: {
                         if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
+                            if(self.viewComponents[idx].isSelected == false) {
+                                self.viewComponents[idx].hasPhoto = true
+                            }
                             self.viewComponents[idx].isSelected.toggle()
-                            self.viewComponents[idx].hasPhoto.toggle()
+                            
                         }
                         self.componentArray[images.count - 1].append(component.name)
                         // TODO: remove if deselecting !!! problem!!!

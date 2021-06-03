@@ -10,26 +10,26 @@ import Firebase
 
 struct JobList: View {
     
-    init(name: String) {
-        updateJobs()
-    }
-    func updateJobs() {
-        let db = Firestore.firestore()
-        db.collection("owners/" + ownerName + "/pics").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        let dict = document.data()
-                        for doc in dict {
-                            if let idx = self.viewComponents.arr.firstIndex(where: { doc.value as! String == $0.name } ) {
-                                self.viewComponents.arr[idx].hasPhoto = true
-                            }
-                        }
-                    }
-                }
-        }
-    }
+//    init(name: String) {
+//        updateJobs()
+//    }
+//    func updateJobs() {
+//        let db = Firestore.firestore()
+//        db.collection("owners/" + ownerName + "/pics").getDocuments() { (querySnapshot, err) in
+//                if let err = err {
+//                    print("Error getting documents: \(err)")
+//                } else {
+//                    for document in querySnapshot!.documents {
+//                        let dict = document.data()
+//                        for doc in dict {
+//                            if let idx = self.viewComponents.arr.firstIndex(where: { doc.value as! String == $0.name } ) {
+//                                self.viewComponents.arr[idx].hasPhoto = true
+//                            }
+//                        }
+//                    }
+//                }
+//        }
+//    }
 
     var body: some View {
             NavigationView {

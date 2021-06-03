@@ -22,7 +22,7 @@ struct ComponentList: View {
     
     init(name: String) {
         self.ownerName = name
-//        updateComponents()
+        updateComponents()
         // TODO: make it so loading happens on the main screen when you load the app, and stuff is done locally after that
     }
     func updateComponents() {
@@ -51,6 +51,7 @@ struct ComponentList: View {
                         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                 }
             }
+            .animation(.default)
             VStack {
                 Spacer()
                 UploadButton(ownerName: ownerName, selectedImages: [UIImage]())
