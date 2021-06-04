@@ -36,7 +36,7 @@ struct MatchingView: View {
             .cornerRadius(10)
             .padding()
         ZStack {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false) { // TODO: make scrolling more user friendly (make closer together so less scroll, make it easier to scroll without clicking, etc.)
                 ForEach(viewComponents) { component in
                     Button(action: {
                         if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
@@ -58,6 +58,7 @@ struct MatchingView: View {
                     }
                     .padding()
                     }
+                // TODO add some kind of "Other" option
                         
                 }
             VStack {
@@ -71,7 +72,7 @@ struct MatchingView: View {
                                 viewComponents[i].hasPhoto = true
                             }
                             viewComponents[i].isSelected = false
-                        }
+                        } // TODO: change so that hasPhoto is changed when done is clicked and that there is a back button to take you back to previous photos (and show what they were marked as)
                         if (images.count == 1) {
                             nextText = "Done"
                         }
@@ -82,9 +83,9 @@ struct MatchingView: View {
                                     
                                     let storage = Storage.storage()
                                     let storageRef = storage.reference()
-                                    let imageDestRef = storageRef.child("images/" + String(i) + ".jpg")
+                                    let imageDestRef = storageRef.child("images/" + ownerName + component + ".jpg")
                                     
-                                    let data = uploads[i].jpegData(compressionQuality: 0.1) // TODO: change the compression quality? (everywhere this is used)
+                                    let data = uploads[i].jpegData(compressionQuality: 0.1)
                                     
                                     let uploadTask = imageDestRef.putData(data!, metadata: nil) { (metadata, error) in
                                       guard let metadata = metadata else {

@@ -20,12 +20,14 @@ struct ComponentList: View {
     @State var viewHidden = false
     @ObservedObject var viewComponents = ViewComponents()
     @State private var displayComponents = [Component]()
+    @State private var images: [UIImage] = [UIImage]()
     
     
     init(name: String) {
         self.ownerName = name
         updateComponents()
         // TODO: make it so loading happens on the main screen when you load the app, and stuff is done locally after that
+        
     }
 
     
@@ -45,6 +47,22 @@ struct ComponentList: View {
                     }
                 }
         }
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        for component in components {
+            let imageRef = storageRef.child("images/" + ownerName + component.name + ".jpg")
+            
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+              if let error = error {
+                // Uh-oh, an error occurred!
+              } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                uploadPDF(ownerName: ownerName, image: image!, componentName: component.name)
+              }
+            }
+        }
+        
     }
     var body: some View {
         ZStack {
@@ -64,6 +82,9 @@ struct ComponentList: View {
                 }
             }
             VStack {
+//                Button(action: {uploadPDF(ownerName: ownerName, images: image)}, label: {
+//                    Text("Upload")
+//                })
                 Spacer()
                 UploadButton(ownerName: ownerName, selectedImages: [UIImage]())
                     .padding()

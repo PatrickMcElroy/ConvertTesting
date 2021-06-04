@@ -16,7 +16,7 @@ struct UploadButton: View {
     @State private var selectedImage: UIImage? = nil
     @State var selectedImages: [UIImage]
 
-    var body: some View {
+    var body: some View { // TODO: make it so that this does not block ComponentViews
         NavigationLink(destination: MatchingView(images: selectedImages, ownerName: ownerName), tag: 1, selection: $action) {
             EmptyView()
         }

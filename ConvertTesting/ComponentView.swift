@@ -56,7 +56,7 @@ struct ComponentView: View {
                             
                             let storage = Storage.storage()
                             let storageRef = storage.reference()
-                            let imageDestRef = storageRef.child("images/image.jpg") // TODO: make this change dynamically? 
+                            let imageDestRef = storageRef.child("images/" + ownerName + componentName + ".jpg")
                             
                             let data = selectedImage!.jpegData(compressionQuality: 0.1)
                             

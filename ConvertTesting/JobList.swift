@@ -45,6 +45,8 @@ struct JobList: View {
                 .background(Color.white)
             }
         
+        // TODO: add a way to search or enter a job into the navigation bar
+        
     }
 }
 

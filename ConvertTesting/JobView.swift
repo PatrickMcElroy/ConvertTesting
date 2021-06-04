@@ -24,7 +24,7 @@ struct JobView: View {
                 VStack {
                     Text("")
                         .frame(minWidth: 0, maxWidth: 16, minHeight: 0, maxHeight: 60)
-                        .background(Color.yellow)
+                        .background(Color.black)
                         .cornerRadius(15)
                     Spacer() // TODO: make this a different color depending on job completion
                 }
@@ -34,10 +34,9 @@ struct JobView: View {
                         .font(.title2)
                         .fontWeight(.medium)
                         .foregroundColor(.black)
-                    Text(job.address)
+                    Link(job.address, destination: URL(string: "comgooglemaps://?daddr=" +  job.address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!) // TODO: maybe underline this? need a label but ask about how it looks
                         .multilineTextAlignment(.leading)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        .foregroundColor(.black)
                     Spacer()
                 }
                 .padding(EdgeInsets(top: 18, leading: 5, bottom: 0, trailing: 0))
@@ -59,6 +58,8 @@ struct JobView: View {
             .background(Color.white)
             .cornerRadius(20)
             .shadow(radius: 4)
+            
+            // TODO: add a way to call each homeowner (blue phone link?)
         }
 
     }
