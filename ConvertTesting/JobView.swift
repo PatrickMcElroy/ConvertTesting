@@ -24,9 +24,9 @@ struct JobView: View {
                 VStack {
                     Text("")
                         .frame(minWidth: 0, maxWidth: 16, minHeight: 0, maxHeight: 60)
-                        .background(Color.black)
+                        .background(Color.yellow)
                         .cornerRadius(15)
-                    Spacer()
+                    Spacer() // TODO: make this a different color depending on job completion
                 }
                 .padding(EdgeInsets(top: 15, leading: 30, bottom: 0, trailing: 0))
                 VStack(alignment: .leading) {

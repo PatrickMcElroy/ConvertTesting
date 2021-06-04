@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 import Firebase
 
 struct MatchingView: View {
@@ -29,7 +28,7 @@ struct MatchingView: View {
         NavigationLink(destination: ContentView(), tag: 1, selection: $action) {
             EmptyView()
         }
-        Image(uiImage: (images.last ?? UIImage())) //TODO: change this to blank
+        Image(uiImage: (images.last ?? UIImage()))
             .resizable()
             .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 0, idealHeight: 200, maxHeight: 300, alignment: .center)
             .navigationBarTitle("Match Your Photos")
@@ -41,14 +40,9 @@ struct MatchingView: View {
                 ForEach(viewComponents) { component in
                     Button(action: {
                         if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
-                            if(self.viewComponents[idx].isSelected == false) {
-                                self.viewComponents[idx].hasPhoto = true
-                            }
                             self.viewComponents[idx].isSelected.toggle()
-                            
                         }
                         self.componentArray[images.count - 1].append(component.name)
-                        // TODO: remove if deselecting !!! problem!!!
                     }) {
                         Text(component.name)
                             .font(.headline)
@@ -73,6 +67,9 @@ struct MatchingView: View {
                     Button(action: {
                         images.removeLast()
                         for i in (0...viewComponents.count - 1) {
+                            if (viewComponents[i].isSelected) {
+                                viewComponents[i].hasPhoto = true
+                            }
                             viewComponents[i].isSelected = false
                         }
                         if (images.count == 1) {

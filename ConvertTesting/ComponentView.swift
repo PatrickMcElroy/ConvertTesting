@@ -12,6 +12,7 @@ import Photos
 struct ComponentView: View {
     var componentName: String
     var ownerName: String
+    var hasPhoto: Bool = false
     @ObservedObject var viewComponents: ViewComponents
     @State private var showPhotoPicker = false
     @State private var selectedImage: UIImage? = nil
@@ -34,7 +35,7 @@ struct ComponentView: View {
                         }
                     })
                 }) {
-                    Text("Upload Photo")
+                    Text(!hasPhoto ? "Upload Photo" : "Add Photos")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
@@ -141,7 +142,7 @@ struct ComponentView: View {
 
                             
                             if let idx = self.viewComponents.arr.firstIndex(where: { $0.name == componentName}) {
-                                self.viewComponents.arr[idx].hasPhoto.toggle()
+                                self.viewComponents.arr[idx].hasPhoto = true
                             }
                             
                           }
@@ -151,15 +152,22 @@ struct ComponentView: View {
                     .edgesIgnoringSafeArea(.all)
                 }
             
-                
-                Text("N/A")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.black)
-                    .frame(width: 60, height: 40, alignment: .center)
-                    .background(Color.gray)
-                    .cornerRadius(10)
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 10))
+                Button(action: {
+                    if let idx = self.viewComponents.arr.firstIndex(where: { $0.name == componentName}) {
+                        self.viewComponents.arr[idx].hasPhoto = true
+                    }
+                })
+                {
+                    Text("N/A")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.black)
+                        .frame(width: 60, height: 40, alignment: .center)
+                        .background(Color.gray)
+                        .cornerRadius(10)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 10))
+                        .isHidden(hasPhoto, remove: true)
+                }
             }
         }
         .frame(width: 350, height: 100, alignment: .center)
@@ -170,8 +178,8 @@ struct ComponentView: View {
     }
 }
 
-//struct ComponentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ComponentView(componentName: "Inside of AC Disconnect")
-//    }
-//}
+struct ComponentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ComponentView(componentName: "Inside of AC Disconnect", ownerName: "John A", viewComponents: ViewComponents())
+    }
+}

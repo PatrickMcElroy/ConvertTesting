@@ -29,6 +29,8 @@
 		CDB3F6C326613D5500F6D3AD /* JobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB3F6C226613D5500F6D3AD /* JobView.swift */; };
 		CDB6B32B2667E69A00AD57F0 /* UploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B32A2667E69A00AD57F0 /* UploadButton.swift */; };
 		CDB6B32D2667F1A000AD57F0 /* MatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B32C2667F1A000AD57F0 /* MatchingView.swift */; };
+		CDB6B331266A624400AD57F0 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B330266A624400AD57F0 /* PDFCreator.swift */; };
+		CDB6B333266A651900AD57F0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB6B332266A651900AD57F0 /* Extensions.swift */; };
 		CDFC94972667C75B00DDDEFD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDFC94962667C75B00DDDEFD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +84,8 @@
 		CDB3F6C226613D5500F6D3AD /* JobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobView.swift; sourceTree = "<group>"; };
 		CDB6B32A2667E69A00AD57F0 /* UploadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadButton.swift; sourceTree = "<group>"; };
 		CDB6B32C2667F1A000AD57F0 /* MatchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingView.swift; sourceTree = "<group>"; };
+		CDB6B330266A624400AD57F0 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
+		CDB6B332266A651900AD57F0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CDFC94962667C75B00DDDEFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D03A7A6840FB97B4CEF55A1D /* Pods-ConvertTesting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvertTesting.debug.xcconfig"; path = "Target Support Files/Pods-ConvertTesting/Pods-ConvertTesting.debug.xcconfig"; sourceTree = "<group>"; };
 		D8A536D5A1B999FC0CA2744A /* Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig"; path = "Target Support Files/Pods-ConvertTesting-ConvertTestingUITests/Pods-ConvertTesting-ConvertTestingUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,7 +155,9 @@
 			children = (
 				CDFC94962667C75B00DDDEFD /* GoogleService-Info.plist */,
 				CD0AAF7B266150660081E749 /* Job.swift */,
+				CDB6B330266A624400AD57F0 /* PDFCreator.swift */,
 				CD25280B26669B94002E5BA9 /* Component.swift */,
+				CDB6B332266A651900AD57F0 /* Extensions.swift */,
 				CD0AAF7D266151420081E749 /* JobData.swift */,
 				CD252807266659FD002E5BA9 /* ComponentData.swift */,
 			);
@@ -478,9 +484,11 @@
 				CD0AAF80266151990081E749 /* JobList.swift in Sources */,
 				CDB3F6C326613D5500F6D3AD /* JobView.swift in Sources */,
 				CD0AAF86266188920081E749 /* ComponentView.swift in Sources */,
+				CDB6B333266A651900AD57F0 /* Extensions.swift in Sources */,
 				CDB3F65D266137DA00F6D3AD /* ContentView.swift in Sources */,
 				CDB3F65B266137DA00F6D3AD /* ConvertTestingApp.swift in Sources */,
 				CD0AAF7C266150660081E749 /* Job.swift in Sources */,
+				CDB6B331266A624400AD57F0 /* PDFCreator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

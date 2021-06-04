@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import Combine
+import PDFKit
 
 class ViewComponents: ObservableObject {
     @Published var arr = components
@@ -20,11 +21,14 @@ struct ComponentList: View {
     @ObservedObject var viewComponents = ViewComponents()
     @State private var displayComponents = [Component]()
     
+    
     init(name: String) {
         self.ownerName = name
         updateComponents()
         // TODO: make it so loading happens on the main screen when you load the app, and stuff is done locally after that
     }
+
+    
     func updateComponents() {
         let db = Firestore.firestore()
         db.collection("owners/" + ownerName + "/pics").getDocuments() { (querySnapshot, err) in
@@ -47,17 +51,25 @@ struct ComponentList: View {
             ScrollView {
                 ForEach(self.viewComponents.arr.filter({ !$0.hasPhoto })) { component in
                     
-                    ComponentView(componentName: component.name, ownerName: ownerName, viewComponents: self.viewComponents)
+                    ComponentView(componentName: component.name, ownerName: ownerName, hasPhoto: false, viewComponents: self.viewComponents)
+                        .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                }
+                Text("Completed")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                ForEach(self.viewComponents.arr.filter({ $0.hasPhoto })) { component in
+                    
+                    ComponentView(componentName: component.name, ownerName: ownerName, hasPhoto: true, viewComponents: self.viewComponents)
                         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                 }
             }
-            .animation(.default)
             VStack {
                 Spacer()
                 UploadButton(ownerName: ownerName, selectedImages: [UIImage]())
                     .padding()
             }
         }
+        .animation(.default)
     }
 }
 
