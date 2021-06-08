@@ -8,5 +8,5 @@
 import Foundation
 
 class LocalData: ObservableObject {
-    var jobArr: [Job] = newJobs
+    @Published var jobArr: [Job] = newJobs
 }

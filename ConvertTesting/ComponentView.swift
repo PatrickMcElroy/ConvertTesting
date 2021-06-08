@@ -13,9 +13,16 @@ struct ComponentView: View {
     var componentName: String
     var ownerName: String
     var hasPhoto: Bool = false
-    @ObservedObject var viewComponents: ViewComponents
+    @EnvironmentObject var jobInfo: LocalData
+    @State var jobIndex: Int = 0
     @State private var showPhotoPicker = false
     @State private var selectedImage: UIImage? = nil
+    
+    // TODO: get rid of all these extra vars
+    
+    func findJob() {
+        self.jobIndex = jobInfo.jobArr.distance(from: jobInfo.jobArr.startIndex, to: jobInfo.jobArr.firstIndex(where: { $0.name == ownerName }) ?? jobInfo.jobArr.startIndex)
+    }
     
     var body: some View {
         VStack {
@@ -141,8 +148,8 @@ struct ComponentView: View {
                             }
 
                             
-                            if let idx = self.viewComponents.arr.firstIndex(where: { $0.name == componentName}) {
-                                self.viewComponents.arr[idx].hasPhoto = true
+                            if let idx = self.jobInfo.jobArr[jobIndex].componentList.firstIndex(where: { $0.name == componentName}) {
+                                self.jobInfo.jobArr[jobIndex].componentList[idx].hasPhoto = true
                             }
                             
                           }
@@ -153,8 +160,8 @@ struct ComponentView: View {
                 }
             
                 Button(action: {
-                    if let idx = self.viewComponents.arr.firstIndex(where: { $0.name == componentName}) {
-                        self.viewComponents.arr[idx].hasPhoto = true
+                    if let idx = self.jobInfo.jobArr[jobIndex].componentList.firstIndex(where: { $0.name == componentName}) {
+                        self.jobInfo.jobArr[jobIndex].componentList[idx].hasPhoto = true
                     }
                 })
                 {
@@ -174,12 +181,13 @@ struct ComponentView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 4)
+        .onAppear(perform: findJob)
             
     }
 }
 
 struct ComponentView_Previews: PreviewProvider {
     static var previews: some View {
-        ComponentView(componentName: "Inside of AC Disconnect", ownerName: "John A", viewComponents: ViewComponents())
+        ComponentView(componentName: "Inside of AC Disconnect", ownerName: "John A")
     }
 }

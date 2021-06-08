@@ -10,31 +10,35 @@ import Firebase
 
 struct JobList: View {
     
-//    init(name: String) {
-//        updateJobs()
-//    }
-//    func updateJobs() {
-//        let db = Firestore.firestore()
-//        db.collection("owners/" + ownerName + "/pics").getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        let dict = document.data()
-//                        for doc in dict {
-//                            if let idx = self.viewComponents.arr.firstIndex(where: { doc.value as! String == $0.name } ) {
-//                                self.viewComponents.arr[idx].hasPhoto = true
-//                            }
-//                        }
-//                    }
-//                }
-//        }
-//    }
+    @StateObject var jobInfo = LocalData()
+    
+    func updateJobs() {
+        jobInfo.jobArr = newJobs
+        let db = Firestore.firestore()
+        Firestore.enableLogging(true)
+        for i in (0...10) {
+            let job = jobInfo.jobArr[i]
+            db.collection("owners/" + job.name + "/pics").getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let dict = document.data()
+                            for doc in dict {
+                                if let idx = self.jobInfo.jobArr[i].componentList.firstIndex(where: { doc.value as! String == $0.name } ) {
+                                    self.jobInfo.jobArr[i].componentList[idx].hasPhoto = true
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }
 
     var body: some View {
             NavigationView {
                 ScrollView {
-                    ForEach(newJobs) { job in
+                    ForEach(jobInfo.jobArr) { job in
                         JobView(job: job)
                             .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                     }
@@ -44,6 +48,8 @@ struct JobList: View {
                 .navigationBarTitleDisplayMode(.large)
                 .background(Color.white)
             }
+            .environmentObject(jobInfo)
+            .onAppear(perform: updateJobs)
         
         // TODO: add a way to search or enter a job into the navigation bar
         
