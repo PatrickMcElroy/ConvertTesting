@@ -10,7 +10,7 @@ import Firebase
 
 struct JobList: View {
     
-    @StateObject var jobInfo = LocalData()
+    @StateObject var jobInfo = LocalData() // data object that fetches from firestore at app launch
     
     func updateJobs() {
         jobInfo.jobArr = newJobs
