@@ -10,16 +10,10 @@ import Firebase
 import Combine
 import PDFKit
 
-class ViewComponents: ObservableObject {
-    @Published var arr = components
-}
-
 struct ComponentList: View {
     var ownerName : String
     @EnvironmentObject var jobInfo: LocalData
-    @ObservedObject var viewComponents = ViewComponents()
     @State private var images: [UIImage] = [UIImage]()
-    
     
     init(name: String) {
         self.ownerName = name

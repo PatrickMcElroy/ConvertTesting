@@ -31,7 +31,7 @@ struct UploadButton: View {
             .font(.title2)
             .fontWeight(.semibold)
             .foregroundColor(.black)
-            .frame(minWidth: 0, maxWidth: 275, minHeight: 0, maxHeight: 75)
+            .frame(minWidth: 0, maxWidth: 225, minHeight: 0, maxHeight: 60)
             .background(Color.gray)
             .cornerRadius(20)
         }.buttonStyle(PlainButtonStyle())

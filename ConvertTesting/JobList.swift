@@ -39,7 +39,7 @@ struct JobList: View {
             NavigationView {
                 ScrollView {
                     ForEach(jobInfo.jobArr) { job in
-                        JobView(job: job)
+                        JobView(jobIndex: jobInfo.jobArr.firstIndex(of: job) ?? jobInfo.jobArr.startIndex)
                             .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                     }
                 }

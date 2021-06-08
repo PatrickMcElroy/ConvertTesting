@@ -18,7 +18,6 @@ struct ComponentView: View {
     @State private var showPhotoPicker = false
     @State private var selectedImage: UIImage? = nil
     
-    // TODO: get rid of all these extra vars
     
     func findJob() {
         self.jobIndex = jobInfo.jobArr.distance(from: jobInfo.jobArr.startIndex, to: jobInfo.jobArr.firstIndex(where: { $0.name == ownerName }) ?? jobInfo.jobArr.startIndex)

@@ -56,7 +56,7 @@ struct MatchingView: View {
                             .colorMultiply(component.hasPhoto && !component.isSelected ? Color.init(UIColor(red: 0.6, green: 0.9, blue: 0.6, alpha: 1)) : .white)
                         
                     }
-                    .padding()
+                    .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
                     }
                 // TODO add some kind of "Other" option
                         

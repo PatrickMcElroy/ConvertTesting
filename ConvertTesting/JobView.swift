@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct JobView: View {
+    @EnvironmentObject var jobInfo: LocalData
     @State private var action: Int? = 0
-    var job: Job
+    @State var jobIndex: Int
     
     
     var body: some View {
-        NavigationLink(destination: JobDetail(job: job), tag: 1, selection: $action) {
+        NavigationLink(destination: JobDetail(job: jobInfo.jobArr[jobIndex]), tag: 1, selection: $action) {
             EmptyView()
         }
         Button(action: {
@@ -24,17 +25,19 @@ struct JobView: View {
                 VStack {
                     Text("")
                         .frame(minWidth: 0, maxWidth: 16, minHeight: 0, maxHeight: 60)
-                        .background(Color.black)
+                        .background(jobInfo.jobArr[jobIndex].componentList.filter({
+                                                                !$0.hasPhoto}).isEmpty ? Color.green : Color.yellow)
                         .cornerRadius(15)
-                    Spacer() // TODO: make this a different color depending on job completion
+                    Spacer()
                 }
+                .animation(.default)
                 .padding(EdgeInsets(top: 15, leading: 30, bottom: 0, trailing: 0))
                 VStack(alignment: .leading) {
-                    Text(job.name)
+                    Text(jobInfo.jobArr[jobIndex].name)
                         .font(.title2)
                         .fontWeight(.medium)
                         .foregroundColor(.black)
-                    Link(job.address, destination: URL(string: "comgooglemaps://?daddr=" +  job.address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!) // TODO: maybe underline this? need a label but ask about how it looks
+                    Link(jobInfo.jobArr[jobIndex].address, destination: URL(string: "comgooglemaps://?daddr=" +  jobInfo.jobArr[jobIndex].address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!) // TODO: maybe underline this? need a label but ask about how it looks
                         .multilineTextAlignment(.leading)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     Spacer()
@@ -42,7 +45,7 @@ struct JobView: View {
                 .padding(EdgeInsets(top: 18, leading: 5, bottom: 0, trailing: 0))
                 Spacer()
                 VStack {
-                    Text(job.installationDate)
+                    Text(jobInfo.jobArr[jobIndex].installationDate)
                         .font(.body)
                         .fontWeight(.thin)
                         .foregroundColor(Color.black)
@@ -65,8 +68,8 @@ struct JobView: View {
     }
 }
 
-struct JobView_Previews: PreviewProvider {
-    static var previews: some View {
-        JobView(job: jobs[0])
-    }
-}
+//struct JobView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JobView(job: jobs[0])
+//    }
+//}

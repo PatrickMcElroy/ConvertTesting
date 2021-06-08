@@ -15,6 +15,7 @@ struct Job: Hashable, Codable, Identifiable {
     var name: String
     var address: String
     var sortDate: Int = 0
+    var finished: Bool = false
     var componentList: [Component] = components
     private enum CodingKeys : String, CodingKey {
             case installationDate = "Installation Date"
