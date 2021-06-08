@@ -181,6 +181,7 @@ struct ComponentView: View {
         .cornerRadius(20)
         .shadow(radius: 4)
         .onAppear(perform: findJob)
+        .animation(.default)
             
     }
 }

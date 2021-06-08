@@ -13,14 +13,13 @@ struct MatchingView: View {
     @State var images : [UIImage]
     @State private var nextText : String = "Next"
     @State private var viewComponents : [Component] = components
-    private var uploads : [UIImage]
     @State private var componentArray : [[String]]
+    @State var currentImage = 0
     var ownerName : String
     
     init(images : [UIImage], ownerName : String) {
         self.ownerName = ownerName
         self.images = images
-        self.uploads = images
         componentArray = [[String]](repeating: [String](), count: images.count)
     }
     
@@ -28,7 +27,7 @@ struct MatchingView: View {
         NavigationLink(destination: ContentView(), tag: 1, selection: $action) {
             EmptyView()
         }
-        Image(uiImage: (images.last ?? UIImage()))
+        Image(uiImage: (images[currentImage]))
             .resizable()
             .frame(minWidth: 0, idealWidth: 100, maxWidth: 300, minHeight: 0, idealHeight: 200, maxHeight: 300, alignment: .center)
             .navigationBarTitle("Match Your Photos")
@@ -39,24 +38,29 @@ struct MatchingView: View {
             ScrollView(.vertical, showsIndicators: false) { // TODO: make scrolling more user friendly (make closer together so less scroll, make it easier to scroll without clicking, etc.)
                 ForEach(viewComponents) { component in
                     Button(action: {
-                        if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
-                            self.viewComponents[idx].isSelected.toggle()
-                        }
-                        self.componentArray[images.count - 1].append(component.name)
+//                        if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
+//                            self.viewComponents[idx].isSelected.toggle()
+                            if (!self.componentArray[currentImage].contains(component.name)) {
+                                self.componentArray[currentImage].append(component.name)
+                            }
+                            else {
+                                self.componentArray[currentImage].removeAll(where: { $0 == component.name })
+                            }
+//                        }
                     }) {
                         Text(component.name)
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.black)
                             .frame(width: 300, height: 40, alignment: .center)
-                            .background(component.isSelected ? Color.green : Color.white)
+                            .background(componentArray[currentImage].contains(component.name) ? Color.green : Color.white)
                             .cornerRadius(10)
-                            .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                            .padding(EdgeInsets(top: 3, leading: 10, bottom: 3, trailing: 10))
                             .shadow(radius: 4)
-                            .colorMultiply(component.hasPhoto && !component.isSelected ? Color.init(UIColor(red: 0.6, green: 0.9, blue: 0.6, alpha: 1)) : .white)
+                            .colorMultiply(component.hasPhoto && !componentArray[currentImage].contains(component.name) ? Color.init(UIColor(red: 0.6, green: 0.9, blue: 0.6, alpha: 1)) : .white)
                         
                     }
-                    .padding(EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
+//                    .padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
                     }
                 // TODO add some kind of "Other" option
                         
@@ -64,28 +68,44 @@ struct MatchingView: View {
             VStack {
                 Spacer()
                 HStack {
+                    Button(action: {
+                        currentImage -= 1
+                        if (currentImage < images.count - 1) {
+                            nextText = "Next"
+                        }
+                    }, label: {
+                        Text("Previous")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.black)
+                            .frame(width: 100, height: 40, alignment: .center)
+                            .background(Color.gray)
+                            .shadow(radius: 7)
+                            .cornerRadius(10)
+                    })
+                    .isHidden(currentImage == 0)
+                    .padding(EdgeInsets(top: 0, leading: 30, bottom: 10, trailing: 10))
                     Spacer()
                     Button(action: {
-                        images.removeLast()
+                        currentImage += 1
                         for i in (0...viewComponents.count - 1) {
-                            if (viewComponents[i].isSelected) {
-                                viewComponents[i].hasPhoto = true
+                            if (componentArray[currentImage-1].contains(viewComponents[i].name)) {
                             }
-                            viewComponents[i].isSelected = false
                         } // TODO: change so that hasPhoto is changed when done is clicked and that there is a back button to take you back to previous photos (and show what they were marked as)
-                        if (images.count == 1) {
+                        if (currentImage == images.count - 1) {
                             nextText = "Done"
                         }
-                        if (images.count == 0) {
+                        else if (currentImage == images.count) {
+                            currentImage -= 1 // TODO: is there a better way to fix index out of range error?
                             let db = Firestore.firestore()
-                            for i in (0...uploads.count - 1) {
+                            for i in (0...images.count - 1) {
                                 for component in componentArray[i] {
                                     
                                     let storage = Storage.storage()
                                     let storageRef = storage.reference()
                                     let imageDestRef = storageRef.child("images/" + ownerName + component + ".jpg")
                                     
-                                    let data = uploads[i].jpegData(compressionQuality: 0.1)
+                                    let data = images[i].jpegData(compressionQuality: 0.1)
                                     
                                     let uploadTask = imageDestRef.putData(data!, metadata: nil) { (metadata, error) in
                                       guard let metadata = metadata else {
@@ -134,7 +154,7 @@ struct MatchingView: View {
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.black)
-                            .frame(width: 110, height: 50, alignment: .center)
+                            .frame(width: 100, height: 40, alignment: .center)
                             .background(Color.gray)
                             .shadow(radius: 7)
                             .cornerRadius(10)

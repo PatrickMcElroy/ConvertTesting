@@ -65,7 +65,6 @@ struct ComponentList: View {
                     .padding()
             }
         }
-        .animation(.default)
     }
 }
 
