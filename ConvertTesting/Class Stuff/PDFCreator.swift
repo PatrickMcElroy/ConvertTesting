@@ -89,3 +89,23 @@ func createFlyer(ownerName: String = "", image: UIImage = UIImage(), componentNa
 
   return data
 }
+
+
+//    func updateComponents() {
+//        let storage = Storage.storage()
+//        let storageRef = storage.reference()
+//        for component in components {
+//            let imageRef = storageRef.child("images/" + ownerName + component.name + ".jpg")
+//
+//            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//              if let error = error {
+//                // Uh-oh, an error occurred!
+//              } else {
+//                // Data for "images/island.jpg" is returned
+//                let image = UIImage(data: data!)
+//                uploadPDF(ownerName: ownerName, image: image!, componentName: component.name)
+//              }
+//            }
+//        }
+    // test code
+//    }
