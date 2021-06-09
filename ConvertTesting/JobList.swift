@@ -53,9 +53,10 @@ struct JobList: View {
                     VStack {
                         Spacer()
                         TextField("Search for a job...", text: $jobSearch)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .textFieldStyle(OvalTextFieldStyle())
                             .frame(minWidth: 0, idealWidth: 200, maxWidth: 300, minHeight: 0, idealHeight: 200, maxHeight: 300, alignment: .bottom)
                             .padding()
+                            .animation(.default)
                     }
                     .zIndex(1)
                 }

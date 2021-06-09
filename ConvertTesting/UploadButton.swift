@@ -28,7 +28,7 @@ struct UploadButton: View {
                 }
             })
         }){
-            Text(uploadTypeElectrical ? "Electrical Photos" : "Install Photos")
+            Text(uploadTypeElectrical ? "+ Electrical" : "+ Install")
             .font(.title2)
             .fontWeight(.semibold)
             .foregroundColor(.black)
