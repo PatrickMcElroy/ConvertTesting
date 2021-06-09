@@ -31,27 +31,28 @@ func uploadPDF(ownerName: String, image: UIImage = UIImage(), componentName: Str
         }
         // upload download url to firestore database
         
-        let db = Firestore.firestore()
-        var ref: DocumentReference? = nil
-        ref = db.collection("owners/" + ownerName + "/pics").addDocument(data: [
-            "url": downloadURL.absoluteString,
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        ref = db.collection("pics").addDocument(data: [
-            "url": downloadURL.absoluteString,
-            "owner": ownerName
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
+        // TODO fix this garbage ass code
+//        let db = Firestore.firestore()
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("owners/" + ownerName + "/pics").addDocument(data: [
+//            "url": downloadURL.absoluteString,
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+//        ref = db.collection("pics").addDocument(data: [
+//            "url": downloadURL.absoluteString,
+//            "owner": ownerName
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
       }
     }
     

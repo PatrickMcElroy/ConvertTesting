@@ -13,13 +13,12 @@ struct ComponentView: View {
     var componentName: String
     var ownerName: String
     var hasPhoto: Bool = false
-    @EnvironmentObject var jobInfo: LocalData
+    @EnvironmentObject var jobInfo: LocalData // finds the LocalData object created in JobList.swift
     @State var jobIndex: Int = 0
-    @State private var showPhotoPicker = false
+    @State private var showPhotoPicker = false // used to bring up photo picker, copied from a tutorial
     @State private var selectedImage: UIImage? = nil
     
-    
-    func findJob() {
+    func findJob() { // sets the jobIndex based on passed in info
         self.jobIndex = jobInfo.jobArr.distance(from: jobInfo.jobArr.startIndex, to: jobInfo.jobArr.firstIndex(where: { $0.name == ownerName }) ?? jobInfo.jobArr.startIndex)
     }
     
@@ -34,21 +33,29 @@ struct ComponentView: View {
             }
             Spacer()
             HStack() {
-                Button(action: {
+                Text("Take Photo")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.white)
+                    .frame(width: 115, height: 40, alignment: .center)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 4))
+                Button(action: { // button to upload photos for a given component
                     PHPhotoLibrary.requestAuthorization({status in
                         if status == .authorized {
                             showPhotoPicker = true
                         }
                     })
                 }) {
-                    Text(!hasPhoto ? "Upload Photo" : "Add Photos")
+                    Text(!hasPhoto ? "Upload" : "Add Photos")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
-                        .frame(width: 250, height: 40, alignment: .center)
+                        .frame(width: 115, height: 40, alignment: .center)
                         .background(Color.blue)
                         .cornerRadius(10)
-                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                        .padding(EdgeInsets(top: 0, leading: 4, bottom: 10, trailing: 4))
                 }
                 .fullScreenCover(isPresented: $showPhotoPicker) {
                     PhotoPicker(filter: .images, limit: 0) { results in
@@ -158,9 +165,21 @@ struct ComponentView: View {
                     .edgesIgnoringSafeArea(.all)
                 }
             
-                Button(action: {
+                Button(action: { // indicates that photo is not needed, upload dummy document to owners folder
                     if let idx = self.jobInfo.jobArr[jobIndex].componentList.firstIndex(where: { $0.name == componentName}) {
                         self.jobInfo.jobArr[jobIndex].componentList[idx].hasPhoto = true
+                    }
+                    let db = Firestore.firestore()
+                    var ref: DocumentReference? = nil
+                    ref = db.collection("owners/" + ownerName + "/pics").addDocument(data: [
+                        "componentName": componentName,
+                        "owner": ownerName
+                    ]) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added with ID: \(ref!.documentID)")
+                        }
                     }
                 })
                 {
@@ -171,7 +190,7 @@ struct ComponentView: View {
                         .frame(width: 60, height: 40, alignment: .center)
                         .background(Color.gray)
                         .cornerRadius(10)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 10))
+                        .padding(EdgeInsets(top: 0, leading: 4, bottom: 10, trailing: 10))
                         .isHidden(hasPhoto, remove: true)
                 }
             }

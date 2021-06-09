@@ -9,14 +9,13 @@ import SwiftUI
 import Firebase
 
 struct JobList: View {
-    
     @StateObject var jobInfo = LocalData() // data object that fetches from firestore at app launch
     
     func updateJobs() {
-        jobInfo.jobArr = newJobs
-        let db = Firestore.firestore()
-        Firestore.enableLogging(true)
-        for i in (0...10) {
+        jobInfo.jobArr = newJobs // initialize the array with all jobs loaded in JobData.swift
+
+        let db = Firestore.firestore() // update current jobs if new photos have been uploaded
+        for i in (0...10) { // update to change amount of updated jobs
             let job = jobInfo.jobArr[i]
             db.collection("owners/" + job.name + "/pics").getDocuments() { (querySnapshot, err) in
                     if let err = err {

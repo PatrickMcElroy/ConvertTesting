@@ -16,7 +16,7 @@ struct UploadButton: View {
     @State private var selectedImage: UIImage? = nil
     @State var selectedImages: [UIImage]
 
-    var body: some View { // TODO: make it so that this does not block ComponentViews
+    var body: some View {
         NavigationLink(destination: MatchingView(images: selectedImages, ownerName: ownerName), tag: 1, selection: $action) {
             EmptyView()
         }
@@ -33,7 +33,7 @@ struct UploadButton: View {
             .foregroundColor(.black)
             .frame(minWidth: 0, maxWidth: 225, minHeight: 0, maxHeight: 60)
             .background(Color.gray)
-            .cornerRadius(20)
+            .cornerRadius(18)
         }.buttonStyle(PlainButtonStyle())
         .shadow(radius: 7)
         .fullScreenCover(isPresented: $showPhotoPicker) {

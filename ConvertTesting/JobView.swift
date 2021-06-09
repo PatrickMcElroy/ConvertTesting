@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct JobView: View {
-    @EnvironmentObject var jobInfo: LocalData
-    @State private var action: Int? = 0
-    @State var jobIndex: Int
-    
+    @EnvironmentObject var jobInfo: LocalData // finds the LocalData object created in JobList.swift
+    @State private var action: Int? = 0 // state variable used to trigger navigation change
+    @State var jobIndex: Int // which job is being displayed in this view
     
     var body: some View {
         NavigationLink(destination: JobDetail(job: jobInfo.jobArr[jobIndex]), tag: 1, selection: $action) {
@@ -37,7 +36,7 @@ struct JobView: View {
                         .font(.title2)
                         .fontWeight(.medium)
                         .foregroundColor(.black)
-                    Link(jobInfo.jobArr[jobIndex].address, destination: URL(string: "comgooglemaps://?daddr=" +  jobInfo.jobArr[jobIndex].address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!) // TODO: maybe underline this? need a label but ask about how it looks
+                    Link(jobInfo.jobArr[jobIndex].address, destination: URL(string: "comgooglemaps://?daddr=" +  jobInfo.jobArr[jobIndex].address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!)
                         .multilineTextAlignment(.leading)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     Spacer()

@@ -8,6 +8,7 @@
 import SwiftUI
 import PhotosUI
 
+// photo picking library I found online
 struct PhotoPicker: UIViewControllerRepresentable {
   typealias UIViewControllerType = PHPickerViewController
 
