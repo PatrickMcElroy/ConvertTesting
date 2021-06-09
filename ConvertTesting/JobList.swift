@@ -10,6 +10,7 @@ import Firebase
 
 struct JobList: View {
     @StateObject var jobInfo = LocalData() // data object that fetches from firestore at app launch
+    @State private var jobSearch: String = ""
     
     func updateJobs() {
         jobInfo.jobArr = newJobs // initialize the array with all jobs loaded in JobData.swift
@@ -36,16 +37,28 @@ struct JobList: View {
 
     var body: some View {
             NavigationView {
-                ScrollView {
-                    ForEach(jobInfo.jobArr) { job in
-                        JobView(jobIndex: jobInfo.jobArr.firstIndex(of: job) ?? jobInfo.jobArr.startIndex)
-                            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                ZStack {
+                    ScrollView {
+                        ForEach(jobInfo.jobArr.filter({$0.name.hasPrefix(jobSearch)})) { job in
+                            JobView(jobIndex: jobInfo.jobArr.firstIndex(of: job) ?? jobInfo.jobArr.startIndex)
+                                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+                        }
+                        .animation(.default)
                     }
+                    .zIndex(0)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationTitle("Upcoming Jobs")
+                    .navigationBarTitleDisplayMode(.large)
+                    .background(Color.white)
+                    VStack {
+                        Spacer()
+                        TextField("Search for a job...", text: $jobSearch)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(minWidth: 0, idealWidth: 200, maxWidth: 300, minHeight: 0, idealHeight: 200, maxHeight: 300, alignment: .bottom)
+                            .padding()
+                    }
+                    .zIndex(1)
                 }
-                .navigationBarBackButtonHidden(true)
-                .navigationTitle("Upcoming Jobs")
-                .navigationBarTitleDisplayMode(.large)
-                .background(Color.white)
             }
             .environmentObject(jobInfo)
             .onAppear(perform: updateJobs)

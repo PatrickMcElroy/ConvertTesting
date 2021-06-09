@@ -54,7 +54,6 @@ struct JobView: View {
                         Image(systemName: "phone")
                             .resizable()
                             .frame(minWidth: 0, maxWidth: 25, minHeight: 0, maxHeight: 25)
-                            .padding()
                     }
                     Spacer()
                 }
