@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		CD0AAF86266188920081E749 /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF85266188920081E749 /* ComponentView.swift */; };
 		CD0AAF8826618C550081E749 /* ComponentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0AAF8726618C550081E749 /* ComponentList.swift */; };
 		CD0B38A3266FAABE0087DD1C /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0B38A2266FAABE0087DD1C /* LocalData.swift */; };
+		CD0B38A9267135090087DD1C /* Camera-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = CD0B38A8267135090087DD1C /* Camera-SwiftUI */; };
 		CD252808266659FD002E5BA9 /* ComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD252807266659FD002E5BA9 /* ComponentData.swift */; };
 		CD25280A266699C3002E5BA9 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD252809266699C3002E5BA9 /* PhotoPicker.swift */; };
 		CD25280C26669B94002E5BA9 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD25280B26669B94002E5BA9 /* Component.swift */; };
@@ -99,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27E08ABC372608BD36A43B62 /* Pods_ConvertTesting.framework in Frameworks */,
+				CD0B38A9267135090087DD1C /* Camera-SwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +257,9 @@
 			dependencies = (
 			);
 			name = ConvertTesting;
+			packageProductDependencies = (
+				CD0B38A8267135090087DD1C /* Camera-SwiftUI */,
+			);
 			productName = ConvertTesting;
 			productReference = CDB3F657266137DA00F6D3AD /* ConvertTesting.app */;
 			productType = "com.apple.product-type.application";
@@ -329,6 +334,9 @@
 				Base,
 			);
 			mainGroup = CDB3F64E266137DA00F6D3AD;
+			packageReferences = (
+				CD0B38A7267135090087DD1C /* XCRemoteSwiftPackageReference "Camera-SwiftUI" */,
+			);
 			productRefGroup = CDB3F658266137DA00F6D3AD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -818,6 +826,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD0B38A7267135090087DD1C /* XCRemoteSwiftPackageReference "Camera-SwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rorodriguez116/Camera-SwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD0B38A8267135090087DD1C /* Camera-SwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD0B38A7267135090087DD1C /* XCRemoteSwiftPackageReference "Camera-SwiftUI" */;
+			productName = "Camera-SwiftUI";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDB3F64F266137DA00F6D3AD /* Project object */;
 }

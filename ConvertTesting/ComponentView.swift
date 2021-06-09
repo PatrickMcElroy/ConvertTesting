@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import Photos
 import UIKit
+import CameraManager
 
 struct ComponentView: View {
     var componentName: String
@@ -19,17 +20,12 @@ struct ComponentView: View {
     @State private var showPhotoPicker = false // used to bring up photo picker, copied from a tutorial
     @State private var selectedImage: UIImage? = nil
     private let session = AVCaptureSession()
+//    @StateObject var model = CameraModel()
     
     func findJob() { // sets the jobIndex based on passed in info
         self.jobIndex = jobInfo.jobArr.distance(from: jobInfo.jobArr.startIndex, to: jobInfo.jobArr.firstIndex(where: { $0.name == ownerName }) ?? jobInfo.jobArr.startIndex)
     }
-    
-    
-//    func takePhoto() {
-//        let picker = UIImagePickerController()
-//        present
-//    }
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -41,18 +37,20 @@ struct ComponentView: View {
             }
             Spacer()
             HStack() {
-                Button(action: {
-                    // go to camera
-                }, label: {
-                    Text("Take Photo")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.white)
-                        .frame(width: 115, height: 40, alignment: .center)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 4))
-                })
+//                Button(action: {
+//                    model.configure()
+//                    model.capturePhoto()
+//                }, label: {
+//                    Text("Take Photo")
+//                        .font(.headline)
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(Color.white)
+//                        .frame(width: 115, height: 40, alignment: .center)
+//                        .background(Color.blue)
+//                        .cornerRadius(10)
+//                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 4))
+//                })
+// TODO: comment back in when I figure out how to use the camera
                 Button(action: { // button to upload photos for a given component
                     PHPhotoLibrary.requestAuthorization({status in
                         if status == .authorized {
@@ -60,11 +58,11 @@ struct ComponentView: View {
                         }
                     })
                 }) {
-                    Text(!hasPhoto ? "Upload" : "Add Photos")
+                    Text(!hasPhoto ? "Upload Photos" : "Add Photos")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
-                        .frame(width: 115, height: 40, alignment: .center)
+                        .frame(width: 230, height: 40, alignment: .center) // TODO: change width when adding camera
                         .background(Color.blue)
                         .cornerRadius(10)
                         .padding(EdgeInsets(top: 0, leading: 4, bottom: 10, trailing: 4))
