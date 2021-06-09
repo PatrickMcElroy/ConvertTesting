@@ -42,8 +42,12 @@ struct ComponentList: View {
 //                    Text("Upload")
 //                })
                 Spacer()
-                UploadButton(ownerName: ownerName, selectedImages: [UIImage]())
-                    .padding()
+                HStack {
+                    UploadButton(ownerName: ownerName, selectedImages: [UIImage](), uploadTypeElectrical: true)
+                        .padding(EdgeInsets(top: 0, leading: 3, bottom: 10, trailing: 1))
+                    UploadButton(ownerName: ownerName, selectedImages: [UIImage](), uploadTypeElectrical: false)
+                        .padding(EdgeInsets(top: 0, leading: 1, bottom: 10, trailing: 15))
+                }
             }
         }
     }

@@ -16,11 +16,13 @@ struct Job: Hashable, Codable, Identifiable {
     var address: String
     var sortDate: Int = 0
     var finished: Bool = false
+    var phone: String
     var componentList: [Component] = components
     private enum CodingKeys : String, CodingKey {
             case installationDate = "Installation Date"
             case name = "Opportunity Name"
             case address = "Mailing Address Line 1"
+            case phone = "Contact: Phone"
     }
     static func == (lhs: Job, rhs: Job) -> Bool {
         return lhs.id == rhs.id

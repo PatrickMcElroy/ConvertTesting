@@ -13,4 +13,5 @@ struct Component: Identifiable {
     var name: String
     var hasPhoto: Bool = false
     var isSelected: Bool = false
+    var electricalComponent = false
 }

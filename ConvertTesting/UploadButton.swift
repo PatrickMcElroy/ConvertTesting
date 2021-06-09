@@ -15,9 +15,10 @@ struct UploadButton: View {
     @State private var showPhotoPicker = false
     @State private var selectedImage: UIImage? = nil
     @State var selectedImages: [UIImage]
+    var uploadTypeElectrical: Bool = false // false for panels, true for electrical
 
     var body: some View {
-        NavigationLink(destination: MatchingView(images: selectedImages, ownerName: ownerName), tag: 1, selection: $action) {
+        NavigationLink(destination: MatchingView(images: selectedImages, ownerName: ownerName, uploadTypeElectrical: uploadTypeElectrical), tag: 1, selection: $action) {
             EmptyView()
         }
         Button(action: {
@@ -27,11 +28,11 @@ struct UploadButton: View {
                 }
             })
         }){
-           Text("Add Photo Batch")
+            Text(uploadTypeElectrical ? "Electrical Photos" : "Install Photos")
             .font(.title2)
             .fontWeight(.semibold)
             .foregroundColor(.black)
-            .frame(minWidth: 0, maxWidth: 225, minHeight: 0, maxHeight: 60)
+            .frame(minWidth: 0, maxWidth: 250, minHeight: 0, maxHeight: 60)
             .background(Color.gray)
             .cornerRadius(18)
         }.buttonStyle(PlainButtonStyle())

@@ -39,6 +39,7 @@ struct JobView: View {
                     Link(jobInfo.jobArr[jobIndex].address, destination: URL(string: "comgooglemaps://?daddr=" +  jobInfo.jobArr[jobIndex].address.replacingOccurrences(of: " ", with: "+")) ?? URL(string: "comgooglemaps://")!)
                         .multilineTextAlignment(.leading)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+
                     Spacer()
                 }
                 .padding(EdgeInsets(top: 18, leading: 5, bottom: 0, trailing: 0))
@@ -49,6 +50,12 @@ struct JobView: View {
                         .fontWeight(.thin)
                         .foregroundColor(Color.black)
                         .padding(EdgeInsets(top: 21, leading: 0, bottom: 0, trailing: 0))
+                    Link(destination: URL(string: "tel:" + jobInfo.jobArr[jobIndex].phone.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: " ", with: ""))!) {
+                        Image(systemName: "phone")
+                            .resizable()
+                            .frame(minWidth: 0, maxWidth: 25, minHeight: 0, maxHeight: 25)
+                            .padding()
+                    }
                     Spacer()
                 }
                 Image("arrow")

@@ -9,17 +9,19 @@ import SwiftUI
 import Firebase
 
 struct MatchingView: View {
-    @State private var action : Int? = 0
-    @State var images : [UIImage]
+    @State private var action: Int? = 0
+    @State var images: [UIImage]
     @State private var nextText : String = "Next"
-    @State private var viewComponents : [Component] = components
-    @State private var componentArray : [[String]]
+    @State private var viewComponents: [Component] = components
+    @State private var componentArray: [[String]]
     @State var currentImage = 0
     var ownerName : String
+    var uploadTypeElectrical: Bool // false for panel, true for electrical
     
-    init(images : [UIImage], ownerName : String) {
+    init(images: [UIImage], ownerName: String, uploadTypeElectrical: Bool) {
         self.ownerName = ownerName
         self.images = images
+        self.uploadTypeElectrical = uploadTypeElectrical
         componentArray = [[String]](repeating: [String](), count: images.count)
     }
     
@@ -36,7 +38,7 @@ struct MatchingView: View {
             .padding()
         ZStack {
             ScrollView(.vertical, showsIndicators: false) { // TODO: make scrolling more user friendly (make closer together so less scroll, make it easier to scroll without clicking, etc.)
-                ForEach(viewComponents) { component in
+                ForEach(viewComponents.filter({$0.electricalComponent == uploadTypeElectrical})) { component in
                     Button(action: {
 //                        if let idx = self.viewComponents.firstIndex(where: { $0.name == component.name}) {
 //                            self.viewComponents[idx].isSelected.toggle()
@@ -173,6 +175,6 @@ struct MatchingView_Previews: PreviewProvider {
 
     static var previews: some View {
         
-        MatchingView(images: imageArr, ownerName: "John A")
+        MatchingView(images: imageArr, ownerName: "John A", uploadTypeElectrical: true)
     }
 }
