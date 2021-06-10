@@ -73,8 +73,8 @@ struct JobView: View {
     }
 }
 
-//struct JobView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        JobView(job: jobs[0])
-//    }
-//}
+struct JobView_Previews: PreviewProvider {
+    static var previews: some View {
+        JobView(jobIndex: 0)
+    }
+}

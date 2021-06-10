@@ -14,7 +14,7 @@ struct ComponentList: View {
     var ownerName : String
     @EnvironmentObject var jobInfo: LocalData // finds the LocalData object created in JobList.swift
     @State private var images: [UIImage] = [UIImage]() // might use to make pdf
-    
+
     init(name: String) {
         self.ownerName = name
         

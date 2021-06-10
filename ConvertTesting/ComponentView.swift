@@ -9,7 +9,6 @@ import SwiftUI
 import Firebase
 import Photos
 import UIKit
-import CameraManager
 
 struct ComponentView: View {
     var componentName: String

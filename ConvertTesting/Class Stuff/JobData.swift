@@ -65,7 +65,7 @@ func clean(_ jobs: [Job]) -> [Job] {
             let intYear = Int(jobYear) ?? 0
             let intMonth = Int(jobMonth) ?? 0
             let intDay = Int(jobDay) ?? 0
-            if (intYear > Int(year) ?? 0 && intMonth > Int(month)! || (intMonth == Int(month) && intDay >= Int(day) ?? 0 - 2)) { // TODO: figure out how to format new jobs (goes with having search feature)
+            if (intYear > Int(year) ?? 0 && intMonth > Int(month)! || (intMonth == Int(month) && intDay >= Int(day) ?? 0)) { // TODO: figure out how to format new jobs (goes with having search feature)
                 job.sortDate = intMonth * 1000 + intDay
                 cleanJobs.append(job)
             }

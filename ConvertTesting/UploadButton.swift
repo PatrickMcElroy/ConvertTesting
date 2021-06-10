@@ -28,7 +28,7 @@ struct UploadButton: View {
                 }
             })
         }){
-            Text(uploadTypeElectrical ? "+ Electrical" : "+ Install")
+            Text(uploadTypeElectrical ? "+ Electrical" : "+ Panels")
             .font(.title2)
             .fontWeight(.semibold)
             .foregroundColor(.black)
