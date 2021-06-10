@@ -67,18 +67,18 @@ struct ComponentView: View {
                         .padding(EdgeInsets(top: 0, leading: 4, bottom: 10, trailing: 4))
                 }
                 .fullScreenCover(isPresented: $showPhotoPicker) {
-                    PhotoPicker(filter: .images, limit: 0) { results in
+                    PhotoPicker(filter: .images, limit: 0) { results in // TODO: fix this limit
                       PhotoPicker.convertToUIImageArray(fromResults: results) { (imagesOrNil, errorOrNil) in
                         if let error = errorOrNil {
                           print(error)
                         }
                         if let images = imagesOrNil {
-                          if let first = images.first {
-                            selectedImage = first
+                            for i in (0...images.count - 1) {
+                            selectedImage = images[i]
                             
                             let storage = Storage.storage()
                             let storageRef = storage.reference()
-                            let imageDestRef = storageRef.child("images/" + ownerName + componentName + ".jpg")
+                            let imageDestRef = storageRef.child("images/" + ownerName + componentName + String(i) + ".jpg")
                             
                             let data = selectedImage!.jpegData(compressionQuality: 0.1)
                             
