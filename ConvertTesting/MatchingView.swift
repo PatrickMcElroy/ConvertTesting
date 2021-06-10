@@ -105,7 +105,7 @@ struct MatchingView: View {
                                     
                                     let storage = Storage.storage()
                                     let storageRef = storage.reference()
-                                    let imageDestRef = storageRef.child("images/" + ownerName + component + ".jpg")
+                                    let imageDestRef = storageRef.child("images/" + ownerName + component + String(i) + ".jpg")
                                     
                                     let data = images[i].jpegData(compressionQuality: 0.1)
                                     
@@ -135,7 +135,7 @@ struct MatchingView: View {
                                     }
                                     ref = db.collection("pics").addDocument(data: [
                                         "url": downloadURL.absoluteString,
-                                        "componentName": component,
+                                        "componentName": component + String(i),
                                         "owner": ownerName
                                     ]) { err in
                                         if let err = err {

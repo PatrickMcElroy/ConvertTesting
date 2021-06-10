@@ -20,6 +20,27 @@ struct ComponentList: View {
         
     }
 
+    func updateJobs() {
+        let db = Firestore.firestore() // update current jobs if new photos have been uploaded
+        for i in (0...10) { // update to change amount of updated jobs
+            let job = jobInfo.jobArr[i]
+            db.collection("owners/" + job.name + "/pics").getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let dict = document.data()
+                            for doc in dict {
+                                if let idx = self.jobInfo.jobArr[i].componentList.firstIndex(where: { doc.value as! String == $0.name } ) {
+                                    self.jobInfo.jobArr[i].componentList[idx].hasPhoto = true
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
     var body: some View {
         ZStack {
             ScrollView {
@@ -50,6 +71,9 @@ struct ComponentList: View {
                 }
             }
         }
+        .onAppear(perform: {
+            updateJobs()
+        })
     }
 }
 
